@@ -5,6 +5,7 @@ namespace Fooman\SameOrderInvoiceNumber\Test\Constraint;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Sales\Test\Page\Adminhtml\CreditMemoIndex;
+use Fooman\PhpunitAssertBridge\CompatAssert;
 
 /**
  * Assert that creditmemo is present in the creditmemos grid
@@ -35,7 +36,7 @@ class AssertCreditmemoNumbers extends AbstractConstraint
 
                 $grid->search($filter);
 
-                \PHPUnit\Framework\Assert::assertTrue(
+                CompatAssert::assertTrue(
                     $grid->isRowVisible($filter, false, true),
                     'Creditmemo is absent on creditmemos grid.'
                 );

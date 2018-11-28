@@ -5,6 +5,7 @@ namespace Fooman\SameOrderInvoiceNumber\Test\Constraint;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Shipping\Test\Page\Adminhtml\ShipmentIndex;
+use Fooman\PhpunitAssertBridge\CompatAssert;
 
 /**
  * Assert that shipment is present in the shipments grid
@@ -35,7 +36,7 @@ class AssertShipmentNumbers extends AbstractConstraint
 
                 $grid->search($filter);
 
-                \PHPUnit\Framework\Assert::assertTrue(
+                CompatAssert::assertTrue(
                     $grid->isRowVisible($filter, false, true),
                     'Shipment is absent on shipments grid.'
                 );

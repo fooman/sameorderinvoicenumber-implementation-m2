@@ -5,6 +5,7 @@ namespace Fooman\SameOrderInvoiceNumber\Test\Constraint;
 use Magento\Mtf\Constraint\AbstractConstraint;
 use Magento\Sales\Test\Fixture\OrderInjectable;
 use Magento\Sales\Test\Page\Adminhtml\InvoiceIndex;
+use Fooman\PhpunitAssertBridge\CompatAssert;
 
 /**
  * Assert that invoice is present in the invoices grid
@@ -35,7 +36,7 @@ class AssertInvoiceNumbers extends AbstractConstraint
 
                 $grid->search($filter);
 
-                \PHPUnit\Framework\Assert::assertTrue(
+                CompatAssert::assertTrue(
                     $grid->isRowVisible($filter, false, true),
                     'Invoice is absent on invoices grid.'
                 );
