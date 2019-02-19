@@ -18,6 +18,7 @@
                 <requiredEntity createDataKey="createCategory"/>
             </createData>
             <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
+            <actionGroup ref="logout" stepKey="logout"/>
             <actionGroup ref="foomanSameOrderInvoiceNumberSettingsActionGroup" stepKey="resetSettings" />
         </before>
         <!--Go to product page-->
