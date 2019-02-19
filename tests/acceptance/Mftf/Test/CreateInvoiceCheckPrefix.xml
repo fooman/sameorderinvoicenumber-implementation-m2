@@ -18,8 +18,8 @@
                 <requiredEntity createDataKey="createCategory"/>
             </createData>
             <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin"/>
-            <actionGroup ref="logout" stepKey="logout"/>
             <actionGroup ref="foomanSameOrderInvoiceNumberSettingsActionGroup" stepKey="resetSettings" />
+            <actionGroup ref="logout" stepKey="logout"/>
         </before>
         <!--Go to product page-->
         <amOnPage url="$$createSimpleProduct.custom_attributes[url_key]$$.html" stepKey="navigateToSimpleProductPage"/>
