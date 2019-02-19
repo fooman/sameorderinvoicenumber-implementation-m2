@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="foomanSameOrderInvoiceNumberSettingsActionGroup">
+        <amOnPage url="{{SameOrderInvoiceNumberConfigurationPage.url}}" stepKey="navigateToAdminSameOrderInvoiceNumberSettings"/>
+        <waitForPageLoad stepKey="waitForPageLoadStep"/>
+        <seeInCurrentUrl url="{{SameOrderInvoiceNumberConfigurationPage.url}}" stepKey="seeConfigPage"/>
+        <conditionalClick selector="{{SameOrderInvoiceNumberGeneralSettingsSection.GeneralSettingsTab}}" dependentSelector="{{SameOrderInvoiceNumberGeneralSettingsSection.CheckIfTabExpand}}" stepKey="checkIfTabOpen" visible="true"/>
+        <waitForElementVisible selector="{{SameOrderInvoiceNumberGeneralSettingsSection.invoiceprefix}}" stepKey="waitForExpand" />
+        <fillField selector="{{SameOrderInvoiceNumberGeneralSettingsSection.invoiceprefix}}" userInput="INVC-"  stepKey="fillInvoicePrefix" />
+        <scrollToTopOfPage stepKey="scrollToTop"/>
+        <click stepKey="saveSameOrderInvoiceNumberOptions" selector="{{AdminCategoryMainActionsSection.SaveButton}}"/>
+        <see stepKey="seeSuccess" selector="{{AdminCategoryMessagesSection.SuccessMessage}}" userInput="You saved the configuration."/>
+    </actionGroup>
+</actionGroups>

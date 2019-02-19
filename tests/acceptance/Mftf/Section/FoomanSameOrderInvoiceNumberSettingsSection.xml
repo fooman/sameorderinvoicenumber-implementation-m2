@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+    <section name="SameOrderInvoiceNumberGeneralSettingsSection">
+        <element name="CheckIfTabExpand" type="button" selector="#sameorderinvoicenumber_settings-head:not(.open)"/>
+        <element name="GeneralSettingsTab" type="button" selector="#sameorderinvoicenumber_settings-head"/>
+        <element name="invoiceprefix" type="input" selector="#sameorderinvoicenumber_settings_invoiceprefix"/>
+    </section>
+</sections>
