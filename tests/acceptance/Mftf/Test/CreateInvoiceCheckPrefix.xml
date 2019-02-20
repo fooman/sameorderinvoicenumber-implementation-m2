@@ -43,8 +43,8 @@
         <click selector="{{CheckoutPaymentSection.placeOrder}}" stepKey="clickPlaceOrder"/>
         <grabTextFrom selector="{{CheckoutSuccessMainSection.orderNumber}}" stepKey="grabOrderNumber"/>
 
+        <!--Create invoice in admin-->
         <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
-
         <amOnPage url="{{AdminOrdersPage.url}}" stepKey="onOrdersPage"/>
         <waitForPageLoad stepKey="waitForIndexPageLoad"/>
         <fillField selector="{{AdminOrdersGridSection.search}}" userInput="{$grabOrderNumber}" stepKey="searchOrderNum"/>
@@ -56,5 +56,10 @@
         <click selector="{{AdminInvoiceMainActionsSection.submitInvoice}}" stepKey="clickSubmitInvoice"/>
         <waitForPageLoad stepKey="waitForInvoicePageLoad"/>
         <see selector="{{AdminOrderDetailsMessagesSection.successMessage}}" userInput="The invoice has been created." stepKey="seeSuccessMessage"/>
+
+        <!--Check invoice number-->
+        <amOnPage url="{{AdminOrdersPage.url}}" stepKey="onInvoicesPage"/>
+        <waitForPageLoad stepKey="waitForIndexPageLoad2"/>
+        <see selector="{{AdminInvoicesGridSection.invoiceIncrementId}}" userInput="INVC-000000001" stepKey="seeInvoiceIncrementId"/>
     </test>
 </tests>
