@@ -41,6 +41,7 @@
 
         <!--Click Place Order button-->
         <click selector="{{CheckoutPaymentSection.placeOrder}}" stepKey="clickPlaceOrder"/>
+        <grabTextFrom selector="{{CheckoutSuccessMainSection.orderNumber}}" stepKey="grabOrderNumber"/>
 
         <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
 
