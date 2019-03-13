@@ -60,7 +60,7 @@
         <!--Check invoice number-->
         <amOnPage url="{{AdminInvoicesPage.url}}" stepKey="onInvoicesPage"/>
         <waitForPageLoad stepKey="waitForIndexPageLoad2"/>
-        <see selector="{{AdminInvoicesGridSection.invoiceIncrementId}}" userInput="INVC-000000001" stepKey="seeInvoiceIncrementId"/>
+        <see selector="{{AdminInvoicesGridSection.invoiceIncrementId}}" userInput="INVC-{$grabOrderNumber}" stepKey="seeInvoiceIncrementId"/>
     </test>
     <test name="CreateTwoOrdersCheckInvoiceNumber">
         <annotations>
@@ -143,6 +143,6 @@
         <!--Check invoice number-->
         <amOnPage url="{{AdminInvoicesPage.url}}" stepKey="onInvoicesPage"/>
         <waitForPageLoad stepKey="waitForIndexPageLoad2"/>
-        <see selector="{{AdminInvoicesGridSection.invoiceIncrementId}}" userInput="INVC-000000003" stepKey="seeInvoiceIncrementId"/>
+        <see selector="{{AdminInvoicesGridSection.invoiceIncrementId}}" userInput="INVC-{$grabOrderNumber2}" stepKey="seeInvoiceIncrementId"/>
     </test>
 </tests>
