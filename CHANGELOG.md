@@ -2,33 +2,33 @@
 
 ## [Unreleased]
 
-## [103.0.0] 2018-11-28
+## [103.0.0] - 2018-11-28
 ### Added
 - Support for Magento 2.3
 ### Changed
 - Package name renamed to fooman/sameorderinvoicenumber-implementation-m2, installation should be via metapackage fooman/sameorderinvoicenumber-m2
 - Increased version number by 100 to differentiate from metapackage
 
-## [2.1.1] 2018-07-22
+## [2.1.1] - 2018-07-22
 ### Changed
 - Reorganised unit tests
 ### Fixed
 - Shipment Integration test for Magento 2.2.5
 
-## [2.1.0] 2017-09-27
+## [2.1.0] - 2017-09-27
 ### Added
 - Support for PHP 7.1
 - Support for Magento 2.2.0
 
-## [2.0.5] 2016-05-30
+## [2.0.5] - 2016-05-30
 ### Fixed
 - Update functional tests to work with 2.1.0-rc1
 
-## [2.0.4] 2016-05-24
+## [2.0.4] - 2016-05-24
 ### Fixed
 - Widen Dependency Definition to work with 2.1.0
 
-## [2.0.3] 2016-04-03
+## [2.0.3] - 2016-04-03
 ### Changed
 - Move dependencies in right location in composer.json
 - Add integration tests
