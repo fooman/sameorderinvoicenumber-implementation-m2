@@ -47,8 +47,9 @@
         <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
         <amOnPage url="{{AdminOrdersPage.url}}" stepKey="onOrdersPage"/>
         <waitForPageLoad stepKey="waitForIndexPageLoad"/>
-        <fillField selector="{{AdminOrdersGridSection.search}}" userInput="{$grabOrderNumber}" stepKey="searchOrderNum"/>
-        <click selector="{{AdminOrdersGridSection.submitSearch}}" stepKey="submitSearch"/>
+        <actionGroup ref="searchAdminDataGridByKeyword" stepKey="searchOrderNum">
+            <argument name="keyword" value="{$grabOrderNumber}"/>
+        </actionGroup>
         <waitForLoadingMaskToDisappear stepKey="waitForLoadingMask4"/>
 
         <click selector="{{AdminOrdersGridSection.firstRow}}" stepKey="clickOrderRow"/>
@@ -60,6 +61,10 @@
         <!--Check invoice number-->
         <amOnPage url="{{AdminInvoicesPage.url}}" stepKey="onInvoicesPage"/>
         <waitForPageLoad stepKey="waitForIndexPageLoad2"/>
+        <actionGroup ref="searchAdminDataGridByKeyword" stepKey="searchInvNum">
+            <argument name="keyword" value="INVC-{$grabOrderNumber}"/>
+        </actionGroup>
+        <waitForLoadingMaskToDisappear stepKey="waitForLoadingMask5"/>
         <see selector="{{AdminInvoicesGridSection.firstInvoiceIncrementId}}" userInput="INVC-{$grabOrderNumber}" stepKey="seeInvoiceIncrementId"/>
     </test>
     <test name="CreateTwoOrdersCheckInvoiceNumber">
@@ -145,8 +150,10 @@
         <!--Check invoice number-->
         <amOnPage url="{{AdminInvoicesPage.url}}" stepKey="onInvoicesPage"/>
         <waitForPageLoad stepKey="waitForIndexPageLoad2"/>
-        <conditionalClick selector="{{AdminDataGridHeaderSection.clearFilters}}" dependentSelector="{{AdminDataGridHeaderSection.clearFilters}}" visible="true" stepKey="clickClearFilters"/>
+        <actionGroup ref="searchAdminDataGridByKeyword" stepKey="searchInvNum">
+            <argument name="keyword" value="INVC-{$grabOrderNumber2}"/>
+        </actionGroup>
         <waitForLoadingMaskToDisappear stepKey="waitForLoadingMask5"/>
-        <see selector="{{AdminInvoicesGridSection.secondInvoiceIncrementId}}" userInput="INVC-{$grabOrderNumber2}" stepKey="seeInvoiceIncrementId"/>
+        <see selector="{{AdminInvoicesGridSection.firstInvoiceIncrementId}}" userInput="INVC-{$grabOrderNumber2}" stepKey="seeInvoiceIncrementId"/>
     </test>
 </tests>
