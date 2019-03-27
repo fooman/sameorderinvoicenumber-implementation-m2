@@ -151,7 +151,7 @@
         <amOnPage url="{{AdminInvoicesPage.url}}" stepKey="onInvoicesPage"/>
         <waitForPageLoad stepKey="waitForIndexPageLoad2"/>
         <actionGroup ref="foomanSearchActionGroup" stepKey="searchInvNum">
-            <argument name="searchterm" value="INVC-{$grabOrderNumber2}"/>
+            <argument name="searchterm" value="{$grabOrderNumber2}"/>
         </actionGroup>
         <waitForLoadingMaskToDisappear stepKey="waitForLoadingMask5"/>
         <see selector="{{AdminInvoicesGridSection.firstInvoiceIncrementId}}" userInput="INVC-{$grabOrderNumber2}" stepKey="seeInvoiceIncrementId"/>
