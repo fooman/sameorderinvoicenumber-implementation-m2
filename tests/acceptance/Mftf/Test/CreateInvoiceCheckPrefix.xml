@@ -47,7 +47,7 @@
         <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
         <amOnPage url="{{AdminOrdersPage.url}}" stepKey="onOrdersPage"/>
         <waitForPageLoad stepKey="waitForIndexPageLoad"/>
-        <actionGroup ref="searchAdminDataGridByKeyword" stepKey="searchOrderNum">
+        <actionGroup ref="foomanSearchActionGroup" stepKey="searchOrderNum">
             <argument name="keyword" value="{$grabOrderNumber}"/>
         </actionGroup>
         <waitForLoadingMaskToDisappear stepKey="waitForLoadingMask4"/>
@@ -135,7 +135,7 @@
         <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
         <amOnPage url="{{AdminOrdersPage.url}}" stepKey="onOrdersPage"/>
         <waitForPageLoad stepKey="waitForIndexPageLoad"/>
-        <actionGroup ref="searchAdminDataGridByKeyword" stepKey="searchOrderNum">
+        <actionGroup ref="foomanSearchActionGroup" stepKey="searchOrderNum">
             <argument name="keyword" value="{$grabOrderNumber2}"/>
         </actionGroup>
 
@@ -150,7 +150,7 @@
         <!--Check invoice number-->
         <amOnPage url="{{AdminInvoicesPage.url}}" stepKey="onInvoicesPage"/>
         <waitForPageLoad stepKey="waitForIndexPageLoad2"/>
-        <actionGroup ref="searchAdminDataGridByKeyword" stepKey="searchInvNum">
+        <actionGroup ref="foomanSearchActionGroup" stepKey="searchInvNum">
             <argument name="keyword" value="INVC-{$grabOrderNumber2}"/>
         </actionGroup>
         <waitForLoadingMaskToDisappear stepKey="waitForLoadingMask5"/>
