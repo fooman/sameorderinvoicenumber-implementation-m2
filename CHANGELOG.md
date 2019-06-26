@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [103.0.2] - 2019-06-26
 ### Fixed
 - Stabilise functional tests for 2.3.2
 
