@@ -68,7 +68,7 @@ class CreateCreditMemoStep extends \Magento\Sales\Test\TestStep\CreateCreditMemo
         }
 
         $this->orderCreditMemoNew->getFormBlock()->submit();
-
+        sleep(5);
         return [
             'ids' => ['creditMemoIds' => $this->getCreditMemoIds()]
         ];

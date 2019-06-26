@@ -14,6 +14,7 @@ class CreateShipmentStep extends \Magento\Sales\Test\TestStep\CreateShipmentStep
         $this->salesOrderView->getOrderForm()->waitForElementVisible(
             '#order_ship', Locator::SELECTOR_CSS
         );
+        sleep(5);
         $this->salesOrderView->getPageActions()->ship();
         if (!empty($this->data)) {
             $this->orderShipmentNew->getFormBlock()->fillData($this->data, $this->order->getEntityId()['products']);
