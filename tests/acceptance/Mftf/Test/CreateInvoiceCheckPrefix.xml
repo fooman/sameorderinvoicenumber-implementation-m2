@@ -59,7 +59,7 @@
         <see selector="{{AdminOrderDetailsMessagesSection.successMessage}}" userInput="The invoice has been created." stepKey="seeSuccessMessage"/>
 
         <!--Check invoice number-->
-        <amOnPage url="{{AdminInvoicesPage.url}}" stepKey="onInvoicesPage"/>
+        <amOnPage url="sales/invoice/" stepKey="onInvoicesPage"/>
         <waitForPageLoad stepKey="waitForIndexPageLoad2"/>
         <actionGroup ref="foomanSearchActionGroup" stepKey="searchInvNum">
             <argument name="searchterm" value="{$grabOrderNumber}"/>
