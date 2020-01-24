@@ -1,8 +1,12 @@
 # Change Log
 
 ## [Unreleased]
+### Fixed
+- Acceptance tests for 2.2.11
 
 ## [103.0.3] - 2019-10-03
+### Added
+- Support for PHP 7.3
 
 ## [103.0.2] - 2019-06-26
 ### Fixed
