@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [103.0.4] - 2020-01-24
 ### Fixed
 - Acceptance tests for 2.2.11
 
