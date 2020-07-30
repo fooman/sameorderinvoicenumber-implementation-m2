@@ -1,8 +1,6 @@
 <?php
 /**
- * @author     Kristof Ringleff, Fooman
- * @package    Fooman_SameOrderInvoiceNumber
- * @copyright  Copyright (c) 2015 Fooman Limited (http://www.fooman.co.nz)
+ * @copyright  Copyright (c) 2009 Fooman Limited (http://www.fooman.co.nz)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
