@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 ### Added
-- Compatibility with Magento 2.4.0, for 
+- Compatibility with Magento 2.4.0
 - Support for Php 7.4
 ### Changed
 - Minimum Magento version is now 2.2.0 - for earlier versions please use previous releases
