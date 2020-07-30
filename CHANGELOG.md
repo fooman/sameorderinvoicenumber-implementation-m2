@@ -1,5 +1,7 @@
 # Change Log
 
+## [Unreleased]
+
 ## [104.0.0] - 2020-07-30
 ### Added
 - Compatibility with Magento 2.4.0
