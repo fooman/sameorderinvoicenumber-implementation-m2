@@ -24,7 +24,7 @@ class InvoiceObserverTest extends BaseUnitTestCase
     {
         $invoice = $this->invoiceOrder();
 
-        $this->assertEquals('100000001', $invoice->getIncrementId());
+        self::assertEquals('100000001', $invoice->getIncrementId());
     }
 
     /**
@@ -35,7 +35,7 @@ class InvoiceObserverTest extends BaseUnitTestCase
     {
         $invoice = $this->invoiceOrder();
 
-        $this->assertEquals('INV-100000001', $invoice->getIncrementId());
+        self::assertEquals('INV-100000001', $invoice->getIncrementId());
     }
 
     /**

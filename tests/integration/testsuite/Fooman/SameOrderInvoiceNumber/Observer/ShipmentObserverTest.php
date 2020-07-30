@@ -24,7 +24,7 @@ class ShipmentObserverTest extends BaseUnitTestCase
     {
         $shipment = $this->shipOrder();
 
-        $this->assertEquals('100000001', $shipment->getIncrementId());
+        self::assertEquals('100000001', $shipment->getIncrementId());
     }
 
     /**
@@ -35,7 +35,7 @@ class ShipmentObserverTest extends BaseUnitTestCase
     {
         $shipment = $this->shipOrder();
 
-        $this->assertEquals('SHIP-100000001', $shipment->getIncrementId());
+        self::assertEquals('SHIP-100000001', $shipment->getIncrementId());
     }
 
     /**

@@ -24,7 +24,7 @@ class CreditmemoObserverTest extends BaseUnitTestCase
     {
         $creditmemo = $this->creditOrder();
 
-        $this->assertEquals('100000001', $creditmemo->getIncrementId());
+        self::assertEquals('100000001', $creditmemo->getIncrementId());
     }
 
     /**
@@ -35,7 +35,7 @@ class CreditmemoObserverTest extends BaseUnitTestCase
     {
         $creditmemo = $this->creditOrder();
 
-        $this->assertEquals('CR-100000001', $creditmemo->getIncrementId());
+        self::assertEquals('CR-100000001', $creditmemo->getIncrementId());
     }
 
     /**
