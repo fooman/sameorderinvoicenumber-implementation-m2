@@ -8,6 +8,8 @@ namespace Fooman\SameOrderInvoiceNumber\Observer;
 
 abstract class AbstractObserver implements \Magento\Framework\Event\ObserverInterface
 {
+    /** @var null|string[] */
+    private $existingIncrementIds;
 
     /**
      * Core store config
@@ -16,12 +18,18 @@ abstract class AbstractObserver implements \Magento\Framework\Event\ObserverInte
      */
     protected $scopeConfig;
 
+    /** @var \Magento\Sales\Model\Order */
+    private $order;
+
     /**
      * path for prefix config setting
      *
      * @var string
      */
     protected $prefixConfigPath;
+
+    /** @var string */
+    private $prefixedIncrementId;
 
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -47,7 +55,7 @@ abstract class AbstractObserver implements \Magento\Framework\Event\ObserverInte
     }
 
     /**
-     * @param $order
+     * @param \Magento\Sales\Model\Order $order
      *
      * @return \Magento\Sales\Model\ResourceModel\Order\Collection\AbstractCollection
      */
@@ -58,27 +66,41 @@ abstract class AbstractObserver implements \Magento\Framework\Event\ObserverInte
      */
     public function assignIncrement($entity)
     {
-        if (!$entity->getId()) {
-            $order = $entity->getOrder();
-            $prefix = $this->getPrefixSetting($order->getStoreId());
-            $collection = $this->getCollection($order);
-            $prefixedOrderIncrement = $prefix . $order->getIncrementId();
-            if ($collection->getSize() == 0) {
-                $newNr = $prefixedOrderIncrement;
-            } else {
-                $maxPostFix = 0;
-                foreach ($collection as $item) {
-                    $currentPostfix = trim(str_replace($prefixedOrderIncrement, '', $item->getIncrementId()), '-');
-                    if (empty($currentPostfix)) {
-                        $currentPostfix = 1;
-                    } else {
-                        $currentPostfix++;
-                    }
-                    $maxPostFix = max($maxPostFix, $currentPostfix);
-                }
-                $newNr = $prefix . $order->getIncrementId() . '-' . $maxPostFix;
-            }
-            $entity->setIncrementId($newNr);
+        if ($entity->getId()) {
+            return;
         }
+
+        $this->order = $entity->getOrder();
+        $this->existingIncrementIds = null;
+
+        $prefix = (string) $this->getPrefixSetting($this->order->getStoreId());
+        $this->prefixedIncrementId = $prefix . $this->order->getIncrementId();
+
+        $newNr = $this->prefixedIncrementId;
+
+        $suffix = 0;
+        while ($this->alreadyExists($newNr)) {
+            $suffix++;
+            $newNr = $this->prefixedIncrementId . '-' . $suffix;
+        }
+
+        $entity->setIncrementId($newNr);
+    }
+
+    public function alreadyExists(string $incrementId): bool
+    {
+        if (!isset($this->existingIncrementIds)) {
+            $collection = $this->getCollection($this->order);
+            $collection->clear();
+            $collection->getSelect()->reset(\Magento\Framework\DB\Select::WHERE);
+            $collection->addAttributeToFilter('increment_id', ['like' => $this->prefixedIncrementId . '%']);
+
+            $this->existingIncrementIds = [];
+            foreach ($collection as $entity) {
+                $this->existingIncrementIds[] = $entity->getIncrementId();
+            }
+        }
+
+        return in_array($incrementId, $this->existingIncrementIds);
     }
 }
