@@ -29,13 +29,21 @@ class CreditmemoObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
      */
     protected function getCreditmemoCollectionMock($orderIncrement, $existingCreditmemos = 0)
     {
+        $selectMock = $this->createPartialMock(\Magento\Framework\DB\Select::class, ['reset']);
+        $selectMock->expects($this->any())
+            ->method('reset')
+            ->will($this->returnSelf());
+
         $creditmemoCollectionMock = $this->createPartialMock(
             \Magento\Sales\Model\ResourceModel\Order\Creditmemo\Collection::class,
-            ['getSize', 'getIterator']
+            ['getSize', 'getIterator', 'getSelect']
         );
         $creditmemoCollectionMock->expects($this->atLeastOnce())
             ->method('getSize')
-            ->will($this->returnValue($existingCreditmemos));
+            ->willReturn($existingCreditmemos);
+        $creditmemoCollectionMock->expects($this->any())
+            ->method('getSelect')
+            ->willReturn($selectMock);
 
         $items = [];
 
@@ -85,15 +93,15 @@ class CreditmemoObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
 
         $orderMock->expects($this->any())
             ->method('getIncrementId')
-            ->will($this->returnValue($orderIncrement));
+            ->willReturn($orderIncrement);
 
         $orderMock->expects($this->any())
             ->method('getStoreId')
-            ->will($this->returnValue(self::TEST_STORE_ID));
+            ->willReturn(self::TEST_STORE_ID);
 
         $orderMock->expects($this->any())
             ->method('getCreditmemosCollection')
-            ->will($this->returnValue($creditMemoCollectionMock));
+            ->willReturn($creditMemoCollectionMock);
 
         //Mock Creditmemo
         $creditmemoMock = $this->getMockBuilder(\Magento\Sales\Model\Order\Creditmemo::class)
@@ -103,11 +111,11 @@ class CreditmemoObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
 
         $creditmemoMock->expects($this->any())
             ->method('getOrder')
-            ->will($this->returnValue($orderMock));
+            ->willReturn($orderMock);
 
         $creditmemoMock->expects($this->any())
             ->method('getId')
-            ->will($this->returnValue(null));
+            ->willReturn(null);
 
         return $creditmemoMock;
     }
@@ -136,7 +144,7 @@ class CreditmemoObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
         $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getCreditmemo']);
         $observer->expects($this->once())
             ->method('getCreditmemo')
-            ->will($this->returnValue($creditmemoMock));
+            ->willReturn($creditmemoMock);
 
 
         //Execute Observer
@@ -173,7 +181,7 @@ class CreditmemoObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
         $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getCreditmemo']);
         $observer->expects($this->once())
             ->method('getCreditmemo')
-            ->will($this->returnValue($creditmemoMock));
+            ->willReturn($creditmemoMock);
 
 
         //Execute Observer
@@ -244,7 +252,7 @@ class CreditmemoObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
                     \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
                     self::TEST_STORE_ID
                 )
-                ->will($this->returnValue(self::TEST_PREFIX));
+                ->willReturn(self::TEST_PREFIX);
         } else {
             $scopeConfigMock = $this->createMock(\Magento\Framework\App\Config\ScopeConfigInterface::class);
         }
