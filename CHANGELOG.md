@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+### Fixed
+- Handle collisions when pre-existing increment numbers are higher than order numbers - thanks @fredden
 
 ## [104.1.0] - 2022-03-29
 ### Added
