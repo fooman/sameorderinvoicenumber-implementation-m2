@@ -36,14 +36,14 @@ class CreditmemoObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
 
         $creditmemoCollectionMock = $this->createPartialMock(
             \Magento\Sales\Model\ResourceModel\Order\Creditmemo\Collection::class,
-            ['getSize', 'getIterator', 'getSelect']
+            ['getIterator', 'getSelect', 'addAttributeToFilter']
         );
-        $creditmemoCollectionMock->expects($this->atLeastOnce())
-            ->method('getSize')
-            ->willReturn($existingCreditmemos);
         $creditmemoCollectionMock->expects($this->any())
             ->method('getSelect')
             ->willReturn($selectMock);
+        $creditmemoCollectionMock->expects($this->any())
+            ->method('addAttributeToFilter')
+            ->will($this->returnSelf());
 
         $items = [];
 

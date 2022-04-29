@@ -29,13 +29,21 @@ class InvoiceObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
      */
     protected function getInvoiceCollectionMock($orderIncrement, $existingInvoices = 0)
     {
+        $selectMock = $this->createPartialMock(\Magento\Framework\DB\Select::class, ['reset']);
+        $selectMock->expects($this->any())
+            ->method('reset')
+            ->will($this->returnSelf());
+
         $invoiceCollectionMock = $this->createPartialMock(
             \Magento\Sales\Model\ResourceModel\Order\Invoice\Collection::class,
-            ['getSize', 'getIterator']
+            ['getIterator', 'getSelect', 'addAttributeToFilter']
         );
-        $invoiceCollectionMock->expects($this->atLeastOnce())
-            ->method('getSize')
-            ->will($this->returnValue($existingInvoices));
+        $invoiceCollectionMock->expects($this->any())
+            ->method('getSelect')
+            ->willReturn($selectMock);
+        $invoiceCollectionMock->expects($this->any())
+            ->method('addAttributeToFilter')
+            ->will($this->returnSelf());
 
         $items = [];
 
@@ -85,15 +93,15 @@ class InvoiceObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
 
         $orderMock->expects($this->any())
             ->method('getIncrementId')
-            ->will($this->returnValue($orderIncrement));
+            ->willReturn($orderIncrement);
 
         $orderMock->expects($this->any())
             ->method('getStoreId')
-            ->will($this->returnValue(self::TEST_STORE_ID));
+            ->willReturn(self::TEST_STORE_ID);
 
         $orderMock->expects($this->any())
             ->method('getInvoiceCollection')
-            ->will($this->returnValue($invoiceMemoCollectionMock));
+            ->willReturn($invoiceMemoCollectionMock);
 
 
         //Mock Invoice
@@ -104,11 +112,11 @@ class InvoiceObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
 
         $invoiceMock->expects($this->any())
             ->method('getOrder')
-            ->will($this->returnValue($orderMock));
+            ->willReturn($orderMock);
 
         $invoiceMock->expects($this->any())
             ->method('getId')
-            ->will($this->returnValue(null));
+            ->willReturn(null);
 
         return $invoiceMock;
     }
@@ -138,7 +146,7 @@ class InvoiceObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
         $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getInvoice']);
         $observer->expects($this->once())
             ->method('getInvoice')
-            ->will($this->returnValue($invoiceMock));
+            ->willReturn($invoiceMock);
 
 
         //Execute Observer
@@ -174,7 +182,7 @@ class InvoiceObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
         $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getInvoice']);
         $observer->expects($this->once())
             ->method('getInvoice')
-            ->will($this->returnValue($invoiceMock));
+            ->willReturn($invoiceMock);
 
 
         //Execute Observer
@@ -245,7 +253,7 @@ class InvoiceObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
                     \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
                     self::TEST_STORE_ID
                 )
-                ->will($this->returnValue(self::TEST_PREFIX));
+                ->willReturn(self::TEST_PREFIX);
         } else {
             $scopeConfigMock = $this->createMock(\Magento\Framework\App\Config\ScopeConfigInterface::class);
         }

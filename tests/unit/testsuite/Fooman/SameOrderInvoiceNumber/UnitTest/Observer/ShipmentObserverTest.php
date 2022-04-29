@@ -29,13 +29,21 @@ class ShipmentObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
      */
     protected function getShipmentCollectionMock($orderIncrement, $existingShipments = 0)
     {
+        $selectMock = $this->createPartialMock(\Magento\Framework\DB\Select::class, ['reset']);
+        $selectMock->expects($this->any())
+            ->method('reset')
+            ->will($this->returnSelf());
+
         $shipmentCollectionFactoryMock = $this->createPartialMock(
             \Magento\Sales\Model\ResourceModel\Order\Shipment\Collection::class,
-            ['getSize', 'getIterator']
+            ['getIterator', 'getSelect', 'addAttributeToFilter']
         );
-        $shipmentCollectionFactoryMock->expects($this->atLeastOnce())
-            ->method('getSize')
-            ->will($this->returnValue($existingShipments));
+        $shipmentCollectionFactoryMock->expects($this->any())
+            ->method('getSelect')
+            ->willReturn($selectMock);
+        $shipmentCollectionFactoryMock->expects($this->any())
+            ->method('addAttributeToFilter')
+            ->will($this->returnSelf());
 
         $items = [];
 
@@ -85,15 +93,15 @@ class ShipmentObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
 
         $orderMock->expects($this->any())
             ->method('getIncrementId')
-            ->will($this->returnValue($orderIncrement));
+            ->willReturn($orderIncrement);
 
         $orderMock->expects($this->any())
             ->method('getStoreId')
-            ->will($this->returnValue(self::TEST_STORE_ID));
+            ->willReturn(self::TEST_STORE_ID);
 
         $orderMock->expects($this->any())
             ->method('getShipmentsCollection')
-            ->will($this->returnValue($shipmentCollectionMock));
+            ->willReturn($shipmentCollectionMock);
 
         //Mock Shipment
         $shipmentMock = $this->getMockBuilder(\Magento\Sales\Model\Order\Shipment::class)
@@ -103,11 +111,11 @@ class ShipmentObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
 
         $shipmentMock->expects($this->any())
             ->method('getOrder')
-            ->will($this->returnValue($orderMock));
+            ->willReturn($orderMock);
 
         $shipmentMock->expects($this->any())
             ->method('getId')
-            ->will($this->returnValue(null));
+            ->willReturn(null);
 
         return $shipmentMock;
     }
@@ -137,7 +145,7 @@ class ShipmentObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
         $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getShipment']);
         $observer->expects($this->once())
             ->method('getShipment')
-            ->will($this->returnValue($shipmentMock));
+            ->willReturn($shipmentMock);
 
 
         //Execute Observer
@@ -174,7 +182,7 @@ class ShipmentObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
         $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getShipment']);
         $observer->expects($this->once())
             ->method('getShipment')
-            ->will($this->returnValue($shipmentMock));
+            ->willReturn($shipmentMock);
 
 
         //Execute Observer
