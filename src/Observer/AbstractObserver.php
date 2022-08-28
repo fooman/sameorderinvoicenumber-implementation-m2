@@ -90,7 +90,7 @@ abstract class AbstractObserver implements \Magento\Framework\Event\ObserverInte
     public function alreadyExists(string $incrementId): bool
     {
         if (!isset($this->existingIncrementIds)) {
-            $collection = $this->getCollection($this->order);
+            $collection = clone $this->getCollection($this->order);
             $collection->clear();
             $collection->getSelect()->reset(\Magento\Framework\DB\Select::WHERE);
             $collection->addAttributeToFilter('increment_id', ['like' => $this->prefixedIncrementId . '%']);
