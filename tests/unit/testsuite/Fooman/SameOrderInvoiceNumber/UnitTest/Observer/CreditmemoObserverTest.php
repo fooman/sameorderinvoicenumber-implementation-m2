@@ -5,7 +5,7 @@ namespace Fooman\SameOrderInvoiceNumber\Observer;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-class CreditmemoObserverTest extends \Fooman\PhpunitBridge\TestCase
+class CreditmemoObserverTest extends TestCase
 {
     const TEST_STORE_ID = 1;
     const TEST_PREFIX = 'CRE-';
