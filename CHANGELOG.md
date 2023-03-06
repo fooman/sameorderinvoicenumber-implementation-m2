@@ -3,7 +3,7 @@
 ## [104.2.0] - 2023-03-06
 ### Added
 - Support for Php 8.2
-- ### Changed
+### Changed
 - Minimum Magento version is now 2.3.0 - for earlier versions please use previous releases
 
 ## [104.1.2] - 2022-09-12
