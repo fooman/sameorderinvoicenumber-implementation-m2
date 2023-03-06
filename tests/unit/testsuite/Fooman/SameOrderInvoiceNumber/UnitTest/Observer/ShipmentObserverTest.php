@@ -3,8 +3,9 @@
 namespace Fooman\SameOrderInvoiceNumber\Observer;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
-class ShipmentObserverTest extends \Fooman\PhpunitBridge\BaseUnitTestCase
+class ShipmentObserverTest extends TestCase
 {
     const TEST_STORE_ID = 1;
     const TEST_PREFIX = 'SHIP-';

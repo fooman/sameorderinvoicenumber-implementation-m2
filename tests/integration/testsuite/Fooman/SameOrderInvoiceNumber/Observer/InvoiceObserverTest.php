@@ -2,12 +2,12 @@
 
 namespace Fooman\SameOrderInvoiceNumber\Observer;
 
-use Fooman\PhpunitBridge\BaseUnitTestCase;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 /**
  * @magentoAppArea      adminhtml
  */
-class InvoiceObserverTest extends BaseUnitTestCase
+class InvoiceObserverTest extends TestCase
 {
 
     protected $objectManager;
