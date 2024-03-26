@@ -63,6 +63,7 @@ abstract class AbstractObserver implements \Magento\Framework\Event\ObserverInte
 
     /**
      * @param $entity
+     * @return void
      */
     public function assignIncrement($entity)
     {
