@@ -89,7 +89,7 @@ class InvoiceObserverTest extends TestCase
         //Mock Order
         $orderMock = $this->getMockBuilder(\Magento\Sales\Model\Order::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getIncrementId', 'getStoreId', 'getInvoiceCollection'])
+            ->onlyMethods(['getIncrementId', 'getStoreId', 'getInvoiceCollection'])
             ->getMock();
 
         $orderMock->expects($this->any())
@@ -108,7 +108,7 @@ class InvoiceObserverTest extends TestCase
         //Mock Invoice
         $invoiceMock = $this->getMockBuilder(\Magento\Sales\Model\Order\Invoice::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getOrder', 'getId'])
+            ->onlyMethods(['getOrder', 'getId'])
             ->getMock();
 
         $invoiceMock->expects($this->any())
@@ -144,7 +144,11 @@ class InvoiceObserverTest extends TestCase
 
         //Mock Observer
         /** @var \Magento\Framework\Event\Observer $observer */
-        $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getInvoice']);
+        $observer = $this->getMockBuilder(\Magento\Framework\Event\Observer::class)
+            ->disableOriginalConstructor()
+            ->addMethods(['getInvoice'])
+            ->getMock();
+
         $observer->expects($this->once())
             ->method('getInvoice')
             ->willReturn($invoiceMock);
@@ -180,7 +184,12 @@ class InvoiceObserverTest extends TestCase
         );
 
         //Mock Observer
-        $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getInvoice']);
+        /** @var \Magento\Framework\Event\Observer $observer */
+        $observer = $this->getMockBuilder(\Magento\Framework\Event\Observer::class)
+            ->disableOriginalConstructor()
+            ->addMethods(['getInvoice'])
+            ->getMock();
+
         $observer->expects($this->once())
             ->method('getInvoice')
             ->willReturn($invoiceMock);

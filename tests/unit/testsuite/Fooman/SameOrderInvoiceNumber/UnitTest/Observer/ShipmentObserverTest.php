@@ -89,7 +89,7 @@ class ShipmentObserverTest extends TestCase
         //Mock Order
         $orderMock = $this->getMockBuilder(\Magento\Sales\Model\Order::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getIncrementId', 'getStoreId', 'getShipmentsCollection'])
+            ->onlyMethods(['getIncrementId', 'getStoreId', 'getShipmentsCollection'])
             ->getMock();
 
         $orderMock->expects($this->any())
@@ -107,7 +107,7 @@ class ShipmentObserverTest extends TestCase
         //Mock Shipment
         $shipmentMock = $this->getMockBuilder(\Magento\Sales\Model\Order\Shipment::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getOrder', 'getId'])
+            ->onlyMethods(['getOrder', 'getId'])
             ->getMock();
 
         $shipmentMock->expects($this->any())
@@ -143,11 +143,14 @@ class ShipmentObserverTest extends TestCase
 
         //Mock Observer
         /** @var \Magento\Framework\Event\Observer $observer */
-        $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getShipment']);
+        $observer = $this->getMockBuilder(\Magento\Framework\Event\Observer::class)
+            ->disableOriginalConstructor()
+            ->addMethods(['getShipment'])
+            ->getMock();
+
         $observer->expects($this->once())
             ->method('getShipment')
             ->willReturn($shipmentMock);
-
 
         //Execute Observer
         $this->object->execute($observer);
@@ -180,11 +183,14 @@ class ShipmentObserverTest extends TestCase
 
         //Mock Observer
         /** @var \Magento\Framework\Event\Observer $observer */
-        $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getShipment']);
+        $observer = $this->getMockBuilder(\Magento\Framework\Event\Observer::class)
+            ->disableOriginalConstructor()
+            ->addMethods(['getShipment'])
+            ->getMock();
+
         $observer->expects($this->once())
             ->method('getShipment')
             ->willReturn($shipmentMock);
-
 
         //Execute Observer
         $this->object->execute($observer);

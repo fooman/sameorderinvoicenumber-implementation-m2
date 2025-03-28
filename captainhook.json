@@ -26,6 +26,11 @@
                 "conditions": []
             },
             {
+                "action": "vendor/bin/phpunit",
+                "options": [],
+                "conditions": []
+            },
+            {
                 "action": "vendor/bin/phpstan analyse src/ -l 5",
                 "options": [],
                 "conditions": []

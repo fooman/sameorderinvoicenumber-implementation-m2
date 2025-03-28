@@ -89,7 +89,7 @@ class CreditmemoObserverTest extends TestCase
         //Mock Order
         $orderMock = $this->getMockBuilder(\Magento\Sales\Model\Order::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getIncrementId', 'getStoreId', 'getCreditmemosCollection'])
+            ->onlyMethods(['getIncrementId', 'getStoreId', 'getCreditmemosCollection'])
             ->getMock();
 
         $orderMock->expects($this->any())
@@ -107,7 +107,7 @@ class CreditmemoObserverTest extends TestCase
         //Mock Creditmemo
         $creditmemoMock = $this->getMockBuilder(\Magento\Sales\Model\Order\Creditmemo::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getOrder', 'getId'])
+            ->onlyMethods(['getOrder', 'getId'])
             ->getMock();
 
         $creditmemoMock->expects($this->any())
@@ -142,7 +142,11 @@ class CreditmemoObserverTest extends TestCase
 
         //Mock Observer
         /** @var \Magento\Framework\Event\Observer $observer */
-        $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getCreditmemo']);
+        $observer = $this->getMockBuilder(\Magento\Framework\Event\Observer::class)
+            ->disableOriginalConstructor()
+            ->addMethods(['getCreditmemo'])
+            ->getMock();
+
         $observer->expects($this->once())
             ->method('getCreditmemo')
             ->willReturn($creditmemoMock);
@@ -179,7 +183,11 @@ class CreditmemoObserverTest extends TestCase
 
         //Mock Observer
         /** @var \Magento\Framework\Event\Observer $observer */
-        $observer = $this->createPartialMock(\Magento\Framework\Event\Observer::class, ['getCreditmemo']);
+        $observer = $this->getMockBuilder(\Magento\Framework\Event\Observer::class)
+            ->disableOriginalConstructor()
+            ->addMethods(['getCreditmemo'])
+            ->getMock();
+
         $observer->expects($this->once())
             ->method('getCreditmemo')
             ->willReturn($creditmemoMock);
