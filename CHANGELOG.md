@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [104.4.0] - 2025-03-31
 ### Added
 - Support for Php 8.4
 
