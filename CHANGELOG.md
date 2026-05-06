@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [104.5.0] - 2026-05-06
 ### Added
 - Support for Php 8.5
 ### Changed
